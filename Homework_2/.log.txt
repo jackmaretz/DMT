@@ -1,0 +1,23 @@
+
+Current time: Wed May  3 23:49:32 2017
+
+
+
+
+
+-----------------------------------------------
+Current data: 
+              ./input_data/u1_base_homework_format.txt
+              ./input_data/u1_test_homework_format.txt
+
+'Load Test Graph.'
+Current time: Wed May  3 23:49:32 2017
+ #Users in Test Graph= 459
+ #Items in Test Graph= 1378
+ #Nodes in Test Graph= 1837
+ #Edges in Test Graph= 19968
+Current time: Wed May  3 23:49:32 2017
+
+
+'Load Training Graph.'
+Current time: Wed May  3 23:49:32 2017
