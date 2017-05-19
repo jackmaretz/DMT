@@ -108,6 +108,18 @@ def create_graph_set_of_users_set_of_items(user_item_ranking_file):
 def create_item_item_graph(graph_users_items):
 	g = nx.Graph()
 	# Your code here ;)
+	users = "vettore users"
+	items = "vettore items"
+	N = len(users)
+	M = len(items)
+	for u in range(N):
+		for i in range(M):
+			j = i + 1
+			while(j < M) :
+				if():
+					g.add_edge(items[i], items[j], weight = 1)
+					weight = weight + 1
+				j = j + 1
 	
 	return g
 
