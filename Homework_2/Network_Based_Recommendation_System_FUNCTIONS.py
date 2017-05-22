@@ -5,7 +5,7 @@ import itertools as it
 import math
 import scipy.sparse
 import random
-
+import matplotlib.pyplot as plt
 
 
 
@@ -27,17 +27,17 @@ def pagerank(M, N, nodelist, alpha=0.85, personalization=None, max_iter=100, tol
 		missing = set(nodelist) - set(personalization)
 		if missing:
 			#raise NetworkXError('Personalization vector dictionary must have a value for every node. Missing nodes %s' % missing)
-			print
-			print 'Error: personalization vector dictionary must have a value for every node'
-			print
+
+			print('Error: personalization vector dictionary must have a value for every node')
+
 			exit(-1)
 		p = scipy.array([personalization[n] for n in nodelist], dtype=float)
 		#p = p / p.sum()
 		sum_of_all_components = p.sum()
 		if sum_of_all_components > 1.001 or sum_of_all_components < 0.999:
-			print
-			print "Error: the personalization vector does not represent a probability distribution :("
-			print
+
+			print( "Error: the personalization vector does not represent a probability distribution :(")
+
 			exit(-1)
 	
 	# Dangling nodes
@@ -47,9 +47,7 @@ def pagerank(M, N, nodelist, alpha=0.85, personalization=None, max_iter=100, tol
 		missing = set(nodelist) - set(dangling)
 		if missing:
 			#raise NetworkXError('Dangling node dictionary must have a value for every node. Missing nodes %s' % missing)
-			print
-			print 'Error: dangling node dictionary must have a value for every node.'
-			print
+			print('Error: dangling node dictionary must have a value for every node.')
 			exit(-1)
 		# Convert the dangling dictionary into an array in nodelist order
 		dangling_weights = scipy.array([dangling[n] for n in nodelist], dtype=float)
@@ -65,9 +63,9 @@ def pagerank(M, N, nodelist, alpha=0.85, personalization=None, max_iter=100, tol
 		if err < N * tol:
 			return dict(zip(nodelist, map(float, x)))
 	#raise NetworkXError('power iteration failed to converge in %d iterations.' % max_iter)
-	print
-	print 'Error: power iteration failed to converge in '+str(max_iter)+' iterations.'
-	print
+
+	print('Error: power iteration failed to converge in '+str(max_iter)+' iterations.')
+
 	exit(-1)
 
 
@@ -95,34 +93,38 @@ def create_graph_set_of_users_set_of_items(user_item_ranking_file):
 	
 
 
+from networkx.algorithms import bipartite
 
-
-
-
-
-
-
+B = nx.Graph()
+B.add_nodes_from([1,2,3,4], bipartite=0) # Add the node attribute "bipartite"
+B.add_nodes_from(['a','b','c'], bipartite=1)
+B.add_edges_from([(1,'c'),(2,'a'),(1,'a'),(3,'a'), (1,'b'), (2,'b'), (2,'c'), (3,'c'),(3,'a'), (4,'a'),(4,'c')])
+plt.clf()
+nx.draw_networkx(B, pos=nx.spring_layout(B))
+plt.show(block=True)
 
 
 
 def create_item_item_graph(graph_users_items):
+	graph = graph_users_items
 	g = nx.Graph()
 	# Your code here ;)
-	users = "vettore users"
-	items = "vettore items"
+	oldGraph = graph_users_items['graph']
+	users = graph_users_items['users']
+	items = graph_users_items['items']
 	N = len(users)
 	M = len(items)
 	for u in range(N):
 		for i in range(M):
 			j = i + 1
 			while(j < M) :
-				if():
+				if(nx.items.neighbours(i) == nx.items.neighbours(j)):
 					g.add_edge(items[i], items[j], weight = 1)
-					weight = weight + 1
 				j = j + 1
 	
 	return g
 
+create_item_item_graph(B)
 
 
 
