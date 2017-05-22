@@ -104,28 +104,33 @@ nx.draw_networkx(B, pos=nx.spring_layout(B))
 plt.show(block=True)
 
 
-
 def create_item_item_graph(graph_users_items):
-	graph = graph_users_items
+	#graph = graph_users_items
 	g = nx.Graph()
 	# Your code here ;)
 	oldGraph = graph_users_items['graph']
 	users = graph_users_items['users']
 	items = graph_users_items['items']
-	N = len(users)
-	M = len(items)
-	for u in range(N):
-		for i in range(M):
-			j = i + 1
-			while(j < M) :
-				if(nx.items.neighbours(i) == nx.items.neighbours(j)):
-					g.add_edge(items[i], items[j], weight = 1)
-				j = j + 1
+	g.add_nodes_from(items)
+
+
+	# N = len(users)
+	# M = len(items)
+	for i in g.nodes():
+		for u in g.nodes():
+			inter = set.intersection(set(oldGraph.neighbors(i)),set(oldGraph.neighbors(u)))
+			if (len(inter) > 0):
+				g.add.edge(items[i],items[u],weight = len(inter))
+			# if(nx.oldGraph.neighbors(i) == nx.oldGraph.neighbors(j)):
+			# 	g.add_edge(items[i], items[j], weight = 1)
+			# j = j + 1
 	
 	return g
-
-create_item_item_graph(B)
-
+d = create_graph_set_of_users_set_of_items("u_data_homework_format.txt")
+B=create_item_item_graph(d)
+plt.clf()
+nx.draw_networkx(B, pos=nx.spring_layout(B))
+plt.show(block=True)
 
 
 def create_preference_vector_for_teleporting(user_id, graph_users_items):
