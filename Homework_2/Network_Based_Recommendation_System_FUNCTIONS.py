@@ -118,7 +118,7 @@ def create_item_item_graph(graph_users_items):
 	# M = len(items)
 	for i in g.nodes():
 		for u in g.nodes():
-			inter = set.intersection(set(oldGraph.neighbors(i)),set(oldGraph.neighbors(u)))
+			inter = set(oldGraph.neighbors(i)).intersection(set(oldGraph.neighbors(u)))
 			if (len(inter) > 0):
 				g.add.edge(items[i],items[u],weight = len(inter))
 			# if(nx.oldGraph.neighbors(i) == nx.oldGraph.neighbors(j)):
